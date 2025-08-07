@@ -18,6 +18,10 @@ CR_NAMESPACE_BEGIN
 #  define CR_WINDOWS
 #endif
 
+#if defined(__EMSCRIPTEN__)
+#  define CR_EMSCRIPTEN
+#endif
+
 #if defined(__ANDROID__)
 #  define CR_ANDROID
 #endif
@@ -274,6 +278,7 @@ struct Platform : public Singleton <Platform> {
    bool ppc = false;
    bool simd = false;
    bool psvita = false;
+   bool emscripten = false;
 
    char appName[64] = {};
 
@@ -308,6 +313,10 @@ struct Platform : public Singleton <Platform> {
 
 #if defined(CR_ARCH_PPC)
       ppc = true;
+#endif
+
+#if defined(CR_EMSCRIPTEN)
+   	  emscripten = true;
 #endif
 
 #if !defined(CR_DISABLE_SIMD)
